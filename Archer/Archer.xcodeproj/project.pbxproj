@@ -1,0 +1,635 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EC44FCB927681AD500A8B312 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCB827681AD500A8B312 /* AppDelegate.swift */; };
+		EC44FCBB27681AD500A8B312 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCBA27681AD500A8B312 /* GameScene.sks */; };
+		EC44FCBD27681AD500A8B312 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCBC27681AD500A8B312 /* Actions.sks */; };
+		EC44FCBF27681AD500A8B312 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCBE27681AD500A8B312 /* GameScene.swift */; };
+		EC44FCC127681AD500A8B312 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCC027681AD500A8B312 /* GameViewController.swift */; };
+		EC44FCC427681AD500A8B312 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCC227681AD500A8B312 /* Main.storyboard */; };
+		EC44FCC627681AD600A8B312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCC527681AD600A8B312 /* Assets.xcassets */; };
+		EC44FCC927681AD600A8B312 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCC727681AD600A8B312 /* LaunchScreen.storyboard */; };
+		EC44FCD327681AD700A8B312 /* ArcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCD227681AD700A8B312 /* ArcherTests.swift */; };
+		EC44FCDD27681AD700A8B312 /* ArcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCDC27681AD700A8B312 /* ArcherUITests.swift */; };
+		EC44FCDF27681AD700A8B312 /* ArcherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCDE27681AD700A8B312 /* ArcherUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC44FCCF27681AD700A8B312 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC44FCAD27681AD500A8B312 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC44FCB427681AD500A8B312;
+			remoteInfo = Archer;
+		};
+		EC44FCD927681AD700A8B312 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC44FCAD27681AD500A8B312 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC44FCB427681AD500A8B312;
+			remoteInfo = Archer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EC44FCB527681AD500A8B312 /* Archer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Archer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC44FCB827681AD500A8B312 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EC44FCBA27681AD500A8B312 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		EC44FCBC27681AD500A8B312 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		EC44FCBE27681AD500A8B312 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		EC44FCC027681AD500A8B312 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		EC44FCC327681AD500A8B312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC44FCC527681AD600A8B312 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC44FCC827681AD600A8B312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EC44FCCE27681AD700A8B312 /* ArcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC44FCD227681AD700A8B312 /* ArcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcherTests.swift; sourceTree = "<group>"; };
+		EC44FCD827681AD700A8B312 /* ArcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC44FCDC27681AD700A8B312 /* ArcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcherUITests.swift; sourceTree = "<group>"; };
+		EC44FCDE27681AD700A8B312 /* ArcherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcherUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC44FCB227681AD500A8B312 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC44FCCB27681AD700A8B312 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC44FCD527681AD700A8B312 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EC44FCAC27681AD500A8B312 = {
+			isa = PBXGroup;
+			children = (
+				EC44FCB727681AD500A8B312 /* Archer */,
+				EC44FCD127681AD700A8B312 /* ArcherTests */,
+				EC44FCDB27681AD700A8B312 /* ArcherUITests */,
+				EC44FCB627681AD500A8B312 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EC44FCB627681AD500A8B312 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC44FCB527681AD500A8B312 /* Archer.app */,
+				EC44FCCE27681AD700A8B312 /* ArcherTests.xctest */,
+				EC44FCD827681AD700A8B312 /* ArcherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC44FCB727681AD500A8B312 /* Archer */ = {
+			isa = PBXGroup;
+			children = (
+				EC44FCB827681AD500A8B312 /* AppDelegate.swift */,
+				EC44FCBA27681AD500A8B312 /* GameScene.sks */,
+				EC44FCBC27681AD500A8B312 /* Actions.sks */,
+				EC44FCBE27681AD500A8B312 /* GameScene.swift */,
+				EC44FCC027681AD500A8B312 /* GameViewController.swift */,
+				EC44FCC227681AD500A8B312 /* Main.storyboard */,
+				EC44FCC527681AD600A8B312 /* Assets.xcassets */,
+				EC44FCC727681AD600A8B312 /* LaunchScreen.storyboard */,
+			);
+			path = Archer;
+			sourceTree = "<group>";
+		};
+		EC44FCD127681AD700A8B312 /* ArcherTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC44FCD227681AD700A8B312 /* ArcherTests.swift */,
+			);
+			path = ArcherTests;
+			sourceTree = "<group>";
+		};
+		EC44FCDB27681AD700A8B312 /* ArcherUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EC44FCDC27681AD700A8B312 /* ArcherUITests.swift */,
+				EC44FCDE27681AD700A8B312 /* ArcherUITestsLaunchTests.swift */,
+			);
+			path = ArcherUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC44FCB427681AD500A8B312 /* Archer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC44FCE227681AD700A8B312 /* Build configuration list for PBXNativeTarget "Archer" */;
+			buildPhases = (
+				EC44FCB127681AD500A8B312 /* Sources */,
+				EC44FCB227681AD500A8B312 /* Frameworks */,
+				EC44FCB327681AD500A8B312 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Archer;
+			productName = Archer;
+			productReference = EC44FCB527681AD500A8B312 /* Archer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EC44FCCD27681AD700A8B312 /* ArcherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC44FCE527681AD700A8B312 /* Build configuration list for PBXNativeTarget "ArcherTests" */;
+			buildPhases = (
+				EC44FCCA27681AD700A8B312 /* Sources */,
+				EC44FCCB27681AD700A8B312 /* Frameworks */,
+				EC44FCCC27681AD700A8B312 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC44FCD027681AD700A8B312 /* PBXTargetDependency */,
+			);
+			name = ArcherTests;
+			productName = ArcherTests;
+			productReference = EC44FCCE27681AD700A8B312 /* ArcherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EC44FCD727681AD700A8B312 /* ArcherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC44FCE827681AD700A8B312 /* Build configuration list for PBXNativeTarget "ArcherUITests" */;
+			buildPhases = (
+				EC44FCD427681AD700A8B312 /* Sources */,
+				EC44FCD527681AD700A8B312 /* Frameworks */,
+				EC44FCD627681AD700A8B312 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC44FCDA27681AD700A8B312 /* PBXTargetDependency */,
+			);
+			name = ArcherUITests;
+			productName = ArcherUITests;
+			productReference = EC44FCD827681AD700A8B312 /* ArcherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC44FCAD27681AD500A8B312 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					EC44FCB427681AD500A8B312 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					EC44FCCD27681AD700A8B312 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = EC44FCB427681AD500A8B312;
+					};
+					EC44FCD727681AD700A8B312 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = EC44FCB427681AD500A8B312;
+					};
+				};
+			};
+			buildConfigurationList = EC44FCB027681AD500A8B312 /* Build configuration list for PBXProject "Archer" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EC44FCAC27681AD500A8B312;
+			productRefGroup = EC44FCB627681AD500A8B312 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC44FCB427681AD500A8B312 /* Archer */,
+				EC44FCCD27681AD700A8B312 /* ArcherTests */,
+				EC44FCD727681AD700A8B312 /* ArcherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC44FCB327681AD500A8B312 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC44FCC427681AD500A8B312 /* Main.storyboard in Resources */,
+				EC44FCBB27681AD500A8B312 /* GameScene.sks in Resources */,
+				EC44FCC627681AD600A8B312 /* Assets.xcassets in Resources */,
+				EC44FCC927681AD600A8B312 /* LaunchScreen.storyboard in Resources */,
+				EC44FCBD27681AD500A8B312 /* Actions.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC44FCCC27681AD700A8B312 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC44FCD627681AD700A8B312 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC44FCB127681AD500A8B312 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC44FCBF27681AD500A8B312 /* GameScene.swift in Sources */,
+				EC44FCC127681AD500A8B312 /* GameViewController.swift in Sources */,
+				EC44FCB927681AD500A8B312 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC44FCCA27681AD700A8B312 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC44FCD327681AD700A8B312 /* ArcherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC44FCD427681AD700A8B312 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC44FCDD27681AD700A8B312 /* ArcherUITests.swift in Sources */,
+				EC44FCDF27681AD700A8B312 /* ArcherUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC44FCD027681AD700A8B312 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC44FCB427681AD500A8B312 /* Archer */;
+			targetProxy = EC44FCCF27681AD700A8B312 /* PBXContainerItemProxy */;
+		};
+		EC44FCDA27681AD700A8B312 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC44FCB427681AD500A8B312 /* Archer */;
+			targetProxy = EC44FCD927681AD700A8B312 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC44FCC227681AD500A8B312 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC44FCC327681AD500A8B312 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EC44FCC727681AD600A8B312 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC44FCC827681AD600A8B312 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC44FCE027681AD700A8B312 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EC44FCE127681AD700A8B312 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC44FCE327681AD700A8B312 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AR7T5G5Z83;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lucaswkuipers.Archer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC44FCE427681AD700A8B312 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AR7T5G5Z83;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lucaswkuipers.Archer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EC44FCE627681AD700A8B312 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AR7T5G5Z83;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lucaswkuipers.ArcherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Archer.app/Archer";
+			};
+			name = Debug;
+		};
+		EC44FCE727681AD700A8B312 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AR7T5G5Z83;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lucaswkuipers.ArcherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Archer.app/Archer";
+			};
+			name = Release;
+		};
+		EC44FCE927681AD700A8B312 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AR7T5G5Z83;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lucaswkuipers.ArcherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Archer;
+			};
+			name = Debug;
+		};
+		EC44FCEA27681AD700A8B312 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AR7T5G5Z83;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = lucaswkuipers.ArcherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Archer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC44FCB027681AD500A8B312 /* Build configuration list for PBXProject "Archer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC44FCE027681AD700A8B312 /* Debug */,
+				EC44FCE127681AD700A8B312 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC44FCE227681AD700A8B312 /* Build configuration list for PBXNativeTarget "Archer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC44FCE327681AD700A8B312 /* Debug */,
+				EC44FCE427681AD700A8B312 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC44FCE527681AD700A8B312 /* Build configuration list for PBXNativeTarget "ArcherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC44FCE627681AD700A8B312 /* Debug */,
+				EC44FCE727681AD700A8B312 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC44FCE827681AD700A8B312 /* Build configuration list for PBXNativeTarget "ArcherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC44FCE927681AD700A8B312 /* Debug */,
+				EC44FCEA27681AD700A8B312 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC44FCAD27681AD500A8B312 /* Project object */;
+}
