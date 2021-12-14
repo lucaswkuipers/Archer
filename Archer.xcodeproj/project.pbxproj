@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		EC44FCB927681AD500A8B312 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCB827681AD500A8B312 /* AppDelegate.swift */; };
-		EC44FCBB27681AD500A8B312 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCBA27681AD500A8B312 /* GameScene.sks */; };
-		EC44FCBD27681AD500A8B312 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCBC27681AD500A8B312 /* Actions.sks */; };
 		EC44FCBF27681AD500A8B312 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCBE27681AD500A8B312 /* GameScene.swift */; };
 		EC44FCC127681AD500A8B312 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCC027681AD500A8B312 /* GameViewController.swift */; };
-		EC44FCC427681AD500A8B312 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCC227681AD500A8B312 /* Main.storyboard */; };
-		EC44FCC627681AD600A8B312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCC527681AD600A8B312 /* Assets.xcassets */; };
 		EC44FCC927681AD600A8B312 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCC727681AD600A8B312 /* LaunchScreen.storyboard */; };
 		EC44FCD327681AD700A8B312 /* ArcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCD227681AD700A8B312 /* ArcherTests.swift */; };
 		EC44FCDD27681AD700A8B312 /* ArcherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCDC27681AD700A8B312 /* ArcherUITests.swift */; };
 		EC44FCDF27681AD700A8B312 /* ArcherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCDE27681AD700A8B312 /* ArcherUITestsLaunchTests.swift */; };
+		EC44FCEC27683AA500A8B312 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCEB27683AA500A8B312 /* GameScene.sks */; };
+		EC44FCF1276842E600A8B312 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCEF276842E600A8B312 /* Main.storyboard */; };
+		EC44FCF927685A0000A8B312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCF827685A0000A8B312 /* Assets.xcassets */; };
+		EC44FCFD27685A8300A8B312 /* TileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCFC27685A8200A8B312 /* TileSet.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,18 +40,18 @@
 /* Begin PBXFileReference section */
 		EC44FCB527681AD500A8B312 /* Archer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Archer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC44FCB827681AD500A8B312 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC44FCBA27681AD500A8B312 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		EC44FCBC27681AD500A8B312 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		EC44FCBE27681AD500A8B312 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EC44FCC027681AD500A8B312 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		EC44FCC327681AD500A8B312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EC44FCC527681AD600A8B312 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC44FCC827681AD600A8B312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC44FCCE27681AD700A8B312 /* ArcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC44FCD227681AD700A8B312 /* ArcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcherTests.swift; sourceTree = "<group>"; };
 		EC44FCD827681AD700A8B312 /* ArcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC44FCDC27681AD700A8B312 /* ArcherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcherUITests.swift; sourceTree = "<group>"; };
 		EC44FCDE27681AD700A8B312 /* ArcherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcherUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EC44FCEB27683AA500A8B312 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		EC44FCF0276842E600A8B312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC44FCF827685A0000A8B312 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC44FCFC27685A8200A8B312 /* TileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TileSet.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +103,13 @@
 			isa = PBXGroup;
 			children = (
 				EC44FCB827681AD500A8B312 /* AppDelegate.swift */,
-				EC44FCBA27681AD500A8B312 /* GameScene.sks */,
-				EC44FCBC27681AD500A8B312 /* Actions.sks */,
 				EC44FCBE27681AD500A8B312 /* GameScene.swift */,
 				EC44FCC027681AD500A8B312 /* GameViewController.swift */,
-				EC44FCC227681AD500A8B312 /* Main.storyboard */,
-				EC44FCC527681AD600A8B312 /* Assets.xcassets */,
+				EC44FCEF276842E600A8B312 /* Main.storyboard */,
 				EC44FCC727681AD600A8B312 /* LaunchScreen.storyboard */,
+				EC44FCEB27683AA500A8B312 /* GameScene.sks */,
+				EC44FCF827685A0000A8B312 /* Assets.xcassets */,
+				EC44FCFC27685A8200A8B312 /* TileSet.sks */,
 			);
 			path = Archer;
 			sourceTree = "<group>";
@@ -235,11 +235,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC44FCC427681AD500A8B312 /* Main.storyboard in Resources */,
-				EC44FCBB27681AD500A8B312 /* GameScene.sks in Resources */,
-				EC44FCC627681AD600A8B312 /* Assets.xcassets in Resources */,
+				EC44FCEC27683AA500A8B312 /* GameScene.sks in Resources */,
 				EC44FCC927681AD600A8B312 /* LaunchScreen.storyboard in Resources */,
-				EC44FCBD27681AD500A8B312 /* Actions.sks in Resources */,
+				EC44FCF927685A0000A8B312 /* Assets.xcassets in Resources */,
+				EC44FCF1276842E600A8B312 /* Main.storyboard in Resources */,
+				EC44FCFD27685A8300A8B312 /* TileSet.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,20 +303,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EC44FCC227681AD500A8B312 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EC44FCC327681AD500A8B312 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EC44FCC727681AD600A8B312 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				EC44FCC827681AD600A8B312 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EC44FCEF276842E600A8B312 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC44FCF0276842E600A8B312 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -451,6 +451,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -479,6 +480,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
