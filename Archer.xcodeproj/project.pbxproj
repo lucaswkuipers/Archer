@@ -18,6 +18,7 @@
 		EC44FCF1276842E600A8B312 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCEF276842E600A8B312 /* Main.storyboard */; };
 		EC44FCF927685A0000A8B312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCF827685A0000A8B312 /* Assets.xcassets */; };
 		EC44FCFD27685A8300A8B312 /* TileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCFC27685A8200A8B312 /* TileSet.sks */; };
+		ECD4B5522769A0710064FB72 /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD4B5512769A0710064FB72 /* ControllerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		EC44FCF0276842E600A8B312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC44FCF827685A0000A8B312 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EC44FCFC27685A8200A8B312 /* TileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TileSet.sks; sourceTree = "<group>"; };
+		ECD4B5512769A0710064FB72 /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				EC44FCEB27683AA500A8B312 /* GameScene.sks */,
 				EC44FCF827685A0000A8B312 /* Assets.xcassets */,
 				EC44FCFC27685A8200A8B312 /* TileSet.sks */,
+				ECD4B5512769A0710064FB72 /* ControllerManager.swift */,
 			);
 			path = Archer;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC44FCBF27681AD500A8B312 /* GameScene.swift in Sources */,
+				ECD4B5522769A0710064FB72 /* ControllerManager.swift in Sources */,
 				EC44FCC127681AD500A8B312 /* GameViewController.swift in Sources */,
 				EC44FCB927681AD500A8B312 /* AppDelegate.swift in Sources */,
 			);
