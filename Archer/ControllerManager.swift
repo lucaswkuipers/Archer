@@ -1,8 +1,32 @@
-//
-//  ControllerManager.swift
-//  Archer
-//
-//  Created by Lucas Kuipers on 15/12/21.
-//
+import GameController
 
-import Foundation
+protocol ControllerManagerDelegate: AnyObject {
+    func didConnect(_ controller: GCController)
+    func didDisconnectController()
+    func didReceiveControllerInput(gamepad: GCExtendedGamepad, element: GCControllerElement, index: Int)
+}
+
+final class ControllerManager {
+    weak var delegate: ControllerManagerDelegate?
+
+    init() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didConnectController),
+                                               name: .GCControllerDidConnect,
+                                               object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didDisconnectController),
+                                               name: .GCControllerDidDisconnect,
+                                               object: nil)
+    }
+
+    @objc private func didConnectController() {
+        guard let controller = GCController.controllers().first else { return }
+        delegate?.didConnect(controller)
+    }
+
+    @objc private func didDisconnectController() {
+        delegate?.didDisconnectController()
+    }
+}

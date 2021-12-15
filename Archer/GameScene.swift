@@ -1,6 +1,10 @@
 import SpriteKit
+import GameController
 
 final class GameScene: SKScene {
+    var controller: GCController?
+    let controllerManager = ControllerManager()
+
     let ground: SKNode = {
         let node = SKShapeNode(rectOf: CGSize(width: 1000, height: 100))
         node.name = "ground"
@@ -56,6 +60,7 @@ final class GameScene: SKScene {
         rightWall.position = CGPoint(x: frame.maxX, y: frame.midY)
         ceiling.position = CGPoint(x: 0, y: frame.maxY)
         player.position = CGPoint(x: 0, y: frame.midY)
+        controllerManager.delegate = self
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -77,5 +82,21 @@ final class GameScene: SKScene {
         let location = touch.location(in: self)
         player.position = location
         player.physicsBody?.isDynamic = true
+    }
+}
+
+extension GameScene: ControllerManagerDelegate {
+    func didConnect(_ controller: GCController) {
+        print("Controller connected!")
+        print("Controller \(controller.debugDescription)")
+        self.controller = controller
+    }
+
+    func didDisconnectController() {
+        print("Controller disconnected")
+    }
+
+    func didReceiveControllerInput(gamepad: GCExtendedGamepad, element: GCControllerElement, index: Int) {
+        print("Did receive controller input: \(element.debugDescription)")
     }
 }
