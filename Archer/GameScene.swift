@@ -2,8 +2,8 @@ import SpriteKit
 import GameController
 
 final class GameScene: SKScene {
-    let playerSpeedFactor: Float = 2
-    let playerMaxSpeed: Float = 100
+    private let playerSpeedFactor: Float = 100
+    private let playerMaxSpeed: Float = 200
     var controller: GCController?
     let controllerManager = ControllerManager()
 
@@ -13,6 +13,7 @@ final class GameScene: SKScene {
         node.fillColor = .white
         node.physicsBody = SKPhysicsBody(rectangleOf: node.frame.size)
         node.physicsBody?.isDynamic = false
+        node.physicsBody?.friction = 1.0
         return node
     }()
 
@@ -48,7 +49,7 @@ final class GameScene: SKScene {
         node.name = "player"
         node.fillColor = .red
         node.physicsBody = SKPhysicsBody(rectangleOf: node.frame.size)
-        node.physicsBody?.linearDamping = 0.5
+        node.physicsBody?.linearDamping = 0.999
         node.physicsBody?.angularDamping = 0.5
         let rotationDegrees = CGFloat.pi / 2
         let rotationRange = SKRange(lowerLimit: -rotationDegrees, upperLimit: rotationDegrees)
@@ -74,17 +75,25 @@ final class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         guard let gamepad = controller?.extendedGamepad else { return }
         let horizontalMovementInput = gamepad.leftThumbstick.xAxis.value
-        let verticalMovementInput = gamepad.leftThumbstick.yAxis.value
         let horizontalAimInput = gamepad.rightThumbstick.xAxis.value
         let verticalAimInput = gamepad.rightThumbstick.yAxis.value
-        move(dx: horizontalMovementInput, dy: verticalMovementInput)
+        move(dx: horizontalMovementInput)
+        clampSpeed()
     }
 
-    private func move(dx: Float, dy: Float) {
+    private func move(dx: Float) {
         let dx = CGFloat(dx * playerSpeedFactor)
-        let dy = CGFloat(dy * playerSpeedFactor)
+//        player.physicsBody?.applyImpulse(CGVector(dx: dx, dy: 0))
+        player.physicsBody?.applyForce(CGVector(dx: dx, dy: 0))
+    }
 
-        player.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
+    private func clampSpeed() {
+        guard var physicsBody = player.physicsBody else { return }
+        if physicsBody.velocity.dx > 0 {
+            physicsBody.velocity.dx = min(physicsBody.velocity.dx, CGFloat(playerMaxSpeed))
+        } else {
+            physicsBody.velocity.dx = max(physicsBody.velocity.dx, -CGFloat(playerMaxSpeed))
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
