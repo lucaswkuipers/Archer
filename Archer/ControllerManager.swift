@@ -3,7 +3,6 @@ import GameController
 protocol ControllerManagerDelegate: AnyObject {
     func didConnect(_ controller: GCController)
     func didDisconnectController()
-    func didReceiveControllerInput(gamepad: GCExtendedGamepad, element: GCControllerElement, index: Int)
 }
 
 final class ControllerManager {

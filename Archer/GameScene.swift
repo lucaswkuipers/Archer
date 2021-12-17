@@ -2,6 +2,7 @@ import SpriteKit
 import GameController
 
 final class GameScene: SKScene {
+    private let controllerManager = ControllerManager()
     private let maxVelocity: CGFloat = 1_000
     private let groundHoleWidth: CGFloat = 150
     private let groundHeight: CGFloat = 100
@@ -10,6 +11,7 @@ final class GameScene: SKScene {
     private let playerWidth: CGFloat = 30
     private let playerHeight: CGFloat = 40
     private let playerCornerRadius: CGFloat = 4
+    private let playerWalkForceMult: Float = 50
     private var groundLeftNode: SKShapeNode?
     private var groundRightNode: SKShapeNode?
     private var ceilingLeftNode: SKShapeNode?
@@ -20,16 +22,19 @@ final class GameScene: SKScene {
     private var rightWallBottomNode: SKShapeNode?
     private var playerNode: SKShapeNode?
     private var playerFeetNode: SKShapeNode?
+    private var controller = GCController()
 
     override func didMove(to view: SKView) {
         addGround()
         addCeiling()
         addWalls()
         addPlayer()
+        setDelegates()
     }
 
     override func update(_ currentTime: TimeInterval) {
         teleportPlayerToSceneBounds()
+        handlePlayerMovement()
         limitPlayerVelocity()
     }
 
@@ -127,9 +132,33 @@ final class GameScene: SKScene {
         }
     }
 
+    private func handlePlayerMovement() {
+        guard let dx = controller.extendedGamepad?.leftThumbstick.xAxis.value else { return }
+        walk(dx: dx)
+    }
+
     private func limitPlayerVelocity() {
         guard let playerVelocity = playerNode?.physicsBody?.velocity else { return }
         playerNode?.physicsBody?.velocity.dx = playerVelocity.dx > 0 ? min(playerVelocity.dx, maxVelocity) : max(playerVelocity.dx, -maxVelocity)
         playerNode?.physicsBody?.velocity.dy = playerVelocity.dy > 0 ? min(playerVelocity.dy, maxVelocity) : max(playerVelocity.dy, -maxVelocity)
+    }
+
+    private func setDelegates() {
+        controllerManager.delegate = self
+    }
+
+    private func walk(dx: Float) {
+        playerNode?.physicsBody?.applyForce(CGVector(dx: Int(dx * playerWalkForceMult) , dy: 0))
+    }
+}
+
+extension GameScene: ControllerManagerDelegate {
+    func didConnect(_ controller: GCController) {
+        self.controller = controller
+        print("Did connect controller!")
+    }
+
+    func didDisconnectController() {
+        print("Did disconnect controller")
     }
 }
