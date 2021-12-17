@@ -12,6 +12,7 @@ final class GameScene: SKScene {
     private let playerHeight: CGFloat = 40
     private let playerCornerRadius: CGFloat = 4
     private let playerWalkForceMult: Float = 50
+    private let playerJumpImpulseMult = 30
     private var groundLeftNode: SKShapeNode?
     private var groundRightNode: SKShapeNode?
     private var ceilingLeftNode: SKShapeNode?
@@ -120,15 +121,15 @@ final class GameScene: SKScene {
     private func teleportPlayerToSceneBounds() {
         guard let playerNode = playerNode else { return }
         if playerNode.position.x >= frame.maxX + playerNode.frame.width / 2 {
-            playerNode.position.x = frame.minX
+            playerNode.position.x = frame.minX - playerNode.frame.width / 2
         } else if playerNode.position.x <= frame.minX - playerNode.frame.width / 2 {
-            playerNode.position.x = frame.maxX
+            playerNode.position.x = frame.maxX + playerNode.frame.width / 2
         }
 
         if playerNode.position.y >= frame.maxY + playerNode.frame.height / 2 {
-            playerNode.position.y = frame.minY
-        } else if playerNode.position.y <= frame.minY {
-            playerNode.position.y = frame.maxY
+            playerNode.position.y = frame.minY - playerNode.frame.height / 2
+        } else if playerNode.position.y <= frame.minY - playerNode.frame.height / 2 {
+            playerNode.position.y = frame.maxY + playerNode.frame.height / 2
         }
     }
 
@@ -150,11 +151,24 @@ final class GameScene: SKScene {
     private func walk(dx: Float) {
         playerNode?.physicsBody?.applyForce(CGVector(dx: Int(dx * playerWalkForceMult) , dy: 0))
     }
+
+    private func jump() {
+        playerNode?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: playerJumpImpulseMult))
+    }
+
+    private func addInputHandlers() {
+        controller.extendedGamepad?.buttonA.pressedChangedHandler = { (_, _, isPressed) in
+            if isPressed {
+                self.jump()
+            }
+        }
+    }
 }
 
 extension GameScene: ControllerManagerDelegate {
     func didConnect(_ controller: GCController) {
         self.controller = controller
+        addInputHandlers()
         print("Did connect controller!")
     }
 
