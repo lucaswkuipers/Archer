@@ -4,6 +4,7 @@ import GameController
 final class GameScene: SKScene {
     private let controllerManager = ControllerManager()
     private let maxVelocity: CGFloat = 1_000
+    private let maxWalkSpeed: CGFloat = 300
     private let groundHoleWidth: CGFloat = 150
     private let groundHeight: CGFloat = 100
     private let wallHoleHeight: CGFloat = 150
@@ -13,6 +14,7 @@ final class GameScene: SKScene {
     private let playerCornerRadius: CGFloat = 4
     private let playerWalkForceMult: Float = 50
     private let playerJumpImpulseMult = 30
+    private let playerGroundDetectionRange: CGFloat = 20
     private var groundLeftNode: SKShapeNode?
     private var groundRightNode: SKShapeNode?
     private var ceilingLeftNode: SKShapeNode?
@@ -82,6 +84,7 @@ final class GameScene: SKScene {
         leftWallTopNode.fillColor = .white
         leftWallTopNode.physicsBody = SKPhysicsBody(rectangleOf: leftWallTopNode.frame.size)
         leftWallTopNode.physicsBody?.isDynamic = false
+        leftWallTopNode.physicsBody?.restitution = 0
         addChild(leftWallTopNode)
 
         leftWallBottomNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
@@ -90,6 +93,7 @@ final class GameScene: SKScene {
         leftWallBottomNode.fillColor = .white
         leftWallBottomNode.physicsBody = SKPhysicsBody(rectangleOf: leftWallBottomNode.frame.size)
         leftWallBottomNode.physicsBody?.isDynamic = false
+        leftWallBottomNode.physicsBody?.restitution = 0
         addChild(leftWallBottomNode)
 
         rightWallTopNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
@@ -98,6 +102,7 @@ final class GameScene: SKScene {
         rightWallTopNode.fillColor = .white
         rightWallTopNode.physicsBody = SKPhysicsBody(rectangleOf: rightWallTopNode.frame.size)
         rightWallTopNode.physicsBody?.isDynamic = false
+        rightWallTopNode.physicsBody?.restitution = 0
         addChild(rightWallTopNode)
 
         rightWallBottomNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
@@ -106,6 +111,7 @@ final class GameScene: SKScene {
         rightWallBottomNode.fillColor = .white
         rightWallBottomNode.physicsBody = SKPhysicsBody(rectangleOf: rightWallBottomNode.frame.size)
         rightWallBottomNode.physicsBody?.isDynamic = false
+        rightWallBottomNode.physicsBody?.restitution = 0
         addChild(rightWallBottomNode)
     }
 
@@ -115,7 +121,17 @@ final class GameScene: SKScene {
         playerNode.position = CGPoint(x: frame.midX, y: frame.midY)
         playerNode.fillColor = .red
         playerNode.physicsBody = SKPhysicsBody(rectangleOf: playerNode.frame.size)
+        playerNode.physicsBody?.restitution = 0
+        playerNode.physicsBody?.allowsRotation = false
+        playerNode.physicsBody?.friction = 0.5
+        playerNode.physicsBody?.linearDamping = 0.9
         addChild(playerNode)
+
+        playerFeetNode = SKShapeNode(rectOf: CGSize(width: playerWidth, height: playerGroundDetectionRange))
+        guard let playerFeetNode = playerFeetNode else { return }
+        playerFeetNode.position = CGPoint(x: 0, y: -playerNode.frame.height / 2)
+        playerNode.addChild(playerFeetNode)
+        playerFeetNode.fillColor = .blue.withAlphaComponent(0.3)
     }
 
     private func teleportPlayerToSceneBounds() {
@@ -149,11 +165,22 @@ final class GameScene: SKScene {
     }
 
     private func walk(dx: Float) {
+        guard let physicsBody = playerNode?.physicsBody else { return }
+        if physicsBody.velocity.dx >= abs(maxWalkSpeed) { return }
         playerNode?.physicsBody?.applyForce(CGVector(dx: Int(dx * playerWalkForceMult) , dy: 0))
     }
 
     private func jump() {
-        playerNode?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: playerJumpImpulseMult))
+        guard let playerFeetNode = playerFeetNode,
+              let groundLeftNode = groundLeftNode,
+              let groundRightNode = groundRightNode,
+              let leftWallBottomNode = leftWallBottomNode,
+              let rightWallBottomNode = rightWallBottomNode else { return }
+
+        let isGrounded = playerFeetNode.intersects(groundLeftNode) || playerFeetNode.intersects(groundRightNode) || playerFeetNode.intersects(leftWallBottomNode) || playerFeetNode.intersects(rightWallBottomNode)
+        if isGrounded {
+            playerNode?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: playerJumpImpulseMult))
+        }
     }
 
     private func addInputHandlers() {
