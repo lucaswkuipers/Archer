@@ -2,134 +2,116 @@ import SpriteKit
 import GameController
 
 final class GameScene: SKScene {
-    private let playerSpeedFactor: Float = 100
-    private let playerMaxSpeed: Float = 200
-    var controller: GCController?
-    let controllerManager = ControllerManager()
-
-    let ground: SKNode = {
-        let node = SKShapeNode(rectOf: CGSize(width: 1000, height: 100))
-        node.name = "ground"
-        node.fillColor = .white
-        node.physicsBody = SKPhysicsBody(rectangleOf: node.frame.size)
-        node.physicsBody?.isDynamic = false
-        node.physicsBody?.friction = 1.0
-        return node
-    }()
-
-    let leftWall: SKNode = {
-        let node = SKShapeNode(rectOf: CGSize(width: 100, height: 1000))
-        node.name = "leftWall"
-        node.physicsBody = SKPhysicsBody(rectangleOf: node.frame.size)
-        node.physicsBody?.isDynamic = false
-        node.fillColor = .white
-        return node
-    }()
-
-    let rightWall: SKNode = {
-        let node = SKShapeNode(rectOf: CGSize(width: 100, height: 1000))
-        node.name = "rightWall"
-        node.physicsBody = SKPhysicsBody(rectangleOf: node.frame.size)
-        node.physicsBody?.isDynamic = false
-        node.fillColor = .white
-        return node
-    }()
-
-    let ceiling: SKNode = {
-        let node = SKShapeNode(rectOf: CGSize(width: 1000, height: 100))
-        node.name = "ceiling"
-        node.physicsBody = SKPhysicsBody(rectangleOf: node.frame.size)
-        node.physicsBody?.isDynamic = false
-        node.fillColor = .white
-        return node
-    }()
-
-    let player: SKNode = {
-        let node = SKShapeNode(rectOf: CGSize(width: 20, height: 30), cornerRadius: 4)
-        node.name = "player"
-        node.fillColor = .red
-        node.physicsBody = SKPhysicsBody(rectangleOf: node.frame.size)
-        node.physicsBody?.linearDamping = 0.999
-        node.physicsBody?.angularDamping = 0.5
-        let rotationDegrees = CGFloat.pi / 2
-        let rotationRange = SKRange(lowerLimit: -rotationDegrees, upperLimit: rotationDegrees)
-        let rotationConstraint = SKConstraint.zRotation(rotationRange)
-        node.constraints = [rotationConstraint]
-        return node
-    }()
+    private let maxVelocity: CGFloat = 1_000
+    private let groundHoleWidth: CGFloat = 150
+    private let groundHeight: CGFloat = 100
+    private let wallHoleHeight: CGFloat = 150
+    private let wallWidth: CGFloat = 100
+    private let playerWidth: CGFloat = 30
+    private let playerHeight: CGFloat = 40
+    private let playerCornerRadius: CGFloat = 4
+    private var groundLeftNode: SKShapeNode?
+    private var groundRightNode: SKShapeNode?
+    private var ceilingLeftNode: SKShapeNode?
+    private var ceilingRightNode: SKShapeNode?
+    private var leftWallTopNode: SKShapeNode?
+    private var leftWallBottomNode: SKShapeNode?
+    private var rightWallTopNode: SKShapeNode?
+    private var rightWallBottomNode: SKShapeNode?
+    private var playerNode: SKShapeNode?
+    private var playerFeetNode: SKShapeNode?
 
     override func didMove(to view: SKView) {
-        addChild(ground)
-        addChild(leftWall)
-        addChild(rightWall)
-        addChild(ceiling)
-        addChild(player)
-        ground.position = CGPoint(x: 0, y: frame.minY)
-        leftWall.position = CGPoint(x: frame.minX, y: frame.midY)
-        rightWall.position = CGPoint(x: frame.maxX, y: frame.midY)
-        ceiling.position = CGPoint(x: 0, y: frame.maxY)
-        player.position = CGPoint(x: 0, y: frame.midY)
-        controllerManager.delegate = self
+        groundLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
+        guard let groundLeftNode = groundLeftNode else { return }
+        groundLeftNode.position = CGPoint(x: frame.minX + groundLeftNode.frame.width / 2, y: frame.minY)
+        groundLeftNode.fillColor = .white
+        groundLeftNode.physicsBody = SKPhysicsBody(rectangleOf: groundLeftNode.frame.size)
+        groundLeftNode.physicsBody?.isDynamic = false
+        addChild(groundLeftNode)
+
+        groundRightNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
+        guard let groundRightNode = groundRightNode else { return }
+        groundRightNode.position = CGPoint(x: frame.maxX - groundRightNode.frame.width / 2, y: frame.minY)
+        groundRightNode.fillColor = .white
+        groundRightNode.physicsBody = SKPhysicsBody(rectangleOf: groundRightNode.frame.size)
+        groundRightNode.physicsBody?.isDynamic = false
+        addChild(groundRightNode)
+
+        ceilingLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
+        guard let ceilingLeftNode = ceilingLeftNode else { return }
+        ceilingLeftNode.position = CGPoint(x: frame.minX + ceilingLeftNode.frame.width / 2, y: frame.maxY)
+        ceilingLeftNode.fillColor = .white
+        ceilingLeftNode.physicsBody = SKPhysicsBody(rectangleOf: ceilingLeftNode.frame.size)
+        ceilingLeftNode.physicsBody?.isDynamic = false
+        addChild(ceilingLeftNode)
+
+        ceilingRightNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
+        guard let ceilingRightNode = ceilingRightNode else { return }
+        ceilingRightNode.position = CGPoint(x: frame.maxX - ceilingRightNode.frame.width / 2, y: frame.maxY)
+        ceilingRightNode.fillColor = .white
+        ceilingRightNode.physicsBody = SKPhysicsBody(rectangleOf: ceilingRightNode.frame.size)
+        ceilingRightNode.physicsBody?.isDynamic = false
+        addChild(ceilingRightNode)
+
+        leftWallTopNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
+        guard let leftWallTopNode = leftWallTopNode else { return }
+        leftWallTopNode.position = CGPoint(x: frame.minX, y: frame.maxY - leftWallTopNode.frame.height / 2)
+        leftWallTopNode.fillColor = .white
+        leftWallTopNode.physicsBody = SKPhysicsBody(rectangleOf: leftWallTopNode.frame.size)
+        leftWallTopNode.physicsBody?.isDynamic = false
+        addChild(leftWallTopNode)
+
+        leftWallBottomNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
+        guard let leftWallBottomNode = leftWallBottomNode else { return }
+        leftWallBottomNode.position = CGPoint(x: frame.minX, y: frame.minY + leftWallBottomNode.frame.height / 2)
+        leftWallBottomNode.fillColor = .white
+        leftWallBottomNode.physicsBody = SKPhysicsBody(rectangleOf: leftWallBottomNode.frame.size)
+        leftWallBottomNode.physicsBody?.isDynamic = false
+        addChild(leftWallBottomNode)
+
+        rightWallTopNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
+        guard let rightWallTopNode = rightWallTopNode else { return }
+        rightWallTopNode.position = CGPoint(x: frame.maxX, y: frame.maxY - rightWallTopNode.frame.height / 2)
+        rightWallTopNode.fillColor = .white
+        rightWallTopNode.physicsBody = SKPhysicsBody(rectangleOf: rightWallTopNode.frame.size)
+        rightWallTopNode.physicsBody?.isDynamic = false
+        addChild(rightWallTopNode)
+
+        rightWallBottomNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
+        guard let rightWallBottomNode = rightWallBottomNode else { return }
+        rightWallBottomNode.position = CGPoint(x: frame.maxX, y: frame.minY + rightWallBottomNode.frame.height / 2)
+        rightWallBottomNode.fillColor = .white
+        rightWallBottomNode.physicsBody = SKPhysicsBody(rectangleOf: rightWallBottomNode.frame.size)
+        rightWallBottomNode.physicsBody?.isDynamic = false
+        addChild(rightWallBottomNode)
+
+        playerNode = SKShapeNode(rectOf: CGSize(width: playerWidth, height: playerHeight), cornerRadius: playerCornerRadius)
+        guard let playerNode = playerNode else { return }
+        playerNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        playerNode.fillColor = .red
+        playerNode.physicsBody = SKPhysicsBody(rectangleOf: playerNode.frame.size)
+        addChild(playerNode)
     }
 
     override func update(_ currentTime: TimeInterval) {
-        guard let gamepad = controller?.extendedGamepad else { return }
-        let horizontalMovementInput = gamepad.leftThumbstick.xAxis.value
-        let horizontalAimInput = gamepad.rightThumbstick.xAxis.value
-        let verticalAimInput = gamepad.rightThumbstick.yAxis.value
-        move(dx: horizontalMovementInput)
-        clampSpeed()
-    }
-
-    private func move(dx: Float) {
-        let dx = CGFloat(dx * playerSpeedFactor)
-//        player.physicsBody?.applyImpulse(CGVector(dx: dx, dy: 0))
-        player.physicsBody?.applyForce(CGVector(dx: dx, dy: 0))
-    }
-
-    private func clampSpeed() {
-        guard var physicsBody = player.physicsBody else { return }
-        if physicsBody.velocity.dx > 0 {
-            physicsBody.velocity.dx = min(physicsBody.velocity.dx, CGFloat(playerMaxSpeed))
-        } else {
-            physicsBody.velocity.dx = max(physicsBody.velocity.dx, -CGFloat(playerMaxSpeed))
+        guard let playerNode = playerNode else { return }
+        if playerNode.position.x >= frame.maxX + playerNode.frame.width / 2 {
+            playerNode.position.x = frame.minX
+        } else if playerNode.position.x <= frame.minX - playerNode.frame.width / 2 {
+            playerNode.position.x = frame.maxX
         }
-    }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        player.position = location
-        player.physicsBody?.isDynamic = false
-    }
+        if playerNode.position.y >= frame.maxY + playerNode.frame.height / 2 {
+            playerNode.position.y = frame.minY
+        } else if playerNode.position.y <= frame.minY {
+            playerNode.position.y = frame.maxY
+        }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        player.position = location
-        player.physicsBody?.isDynamic = false
-    }
+        guard let playerVelocity = playerNode.physicsBody?.velocity else { return }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        player.position = location
-        player.physicsBody?.isDynamic = true
-    }
-}
+        playerNode.physicsBody?.velocity.dx = playerVelocity.dx > 0 ? min(playerVelocity.dx, maxVelocity) : max(playerVelocity.dx, -maxVelocity)
 
-extension GameScene: ControllerManagerDelegate {
-    func didConnect(_ controller: GCController) {
-        print("Controller connected!")
-        print("Controller \(controller.debugDescription)")
-        self.controller = controller
-    }
-
-    func didDisconnectController() {
-        print("Controller disconnected")
-    }
-
-    func didReceiveControllerInput(gamepad: GCExtendedGamepad, element: GCControllerElement, index: Int) {
-        print("Did receive controller input: \(element.debugDescription)")
+        playerNode.physicsBody?.velocity.dy = playerVelocity.dy > 0 ? min(playerVelocity.dy, maxVelocity) : max(playerVelocity.dy, -maxVelocity)
     }
 }
