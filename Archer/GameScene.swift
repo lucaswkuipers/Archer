@@ -22,6 +22,18 @@ final class GameScene: SKScene {
     private var playerFeetNode: SKShapeNode?
 
     override func didMove(to view: SKView) {
+        addGround()
+        addCeiling()
+        addWalls()
+        addPlayer()
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        teleportPlayerToSceneBounds()
+        limitPlayerVelocity()
+    }
+
+    private func addGround() {
         groundLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
         guard let groundLeftNode = groundLeftNode else { return }
         groundLeftNode.position = CGPoint(x: frame.minX + groundLeftNode.frame.width / 2, y: frame.minY)
@@ -37,7 +49,9 @@ final class GameScene: SKScene {
         groundRightNode.physicsBody = SKPhysicsBody(rectangleOf: groundRightNode.frame.size)
         groundRightNode.physicsBody?.isDynamic = false
         addChild(groundRightNode)
+    }
 
+    private func addCeiling() {
         ceilingLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
         guard let ceilingLeftNode = ceilingLeftNode else { return }
         ceilingLeftNode.position = CGPoint(x: frame.minX + ceilingLeftNode.frame.width / 2, y: frame.maxY)
@@ -53,7 +67,9 @@ final class GameScene: SKScene {
         ceilingRightNode.physicsBody = SKPhysicsBody(rectangleOf: ceilingRightNode.frame.size)
         ceilingRightNode.physicsBody?.isDynamic = false
         addChild(ceilingRightNode)
+    }
 
+    private func addWalls() {
         leftWallTopNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
         guard let leftWallTopNode = leftWallTopNode else { return }
         leftWallTopNode.position = CGPoint(x: frame.minX, y: frame.maxY - leftWallTopNode.frame.height / 2)
@@ -85,7 +101,9 @@ final class GameScene: SKScene {
         rightWallBottomNode.physicsBody = SKPhysicsBody(rectangleOf: rightWallBottomNode.frame.size)
         rightWallBottomNode.physicsBody?.isDynamic = false
         addChild(rightWallBottomNode)
+    }
 
+    private func addPlayer() {
         playerNode = SKShapeNode(rectOf: CGSize(width: playerWidth, height: playerHeight), cornerRadius: playerCornerRadius)
         guard let playerNode = playerNode else { return }
         playerNode.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -94,7 +112,7 @@ final class GameScene: SKScene {
         addChild(playerNode)
     }
 
-    override func update(_ currentTime: TimeInterval) {
+    private func teleportPlayerToSceneBounds() {
         guard let playerNode = playerNode else { return }
         if playerNode.position.x >= frame.maxX + playerNode.frame.width / 2 {
             playerNode.position.x = frame.minX
@@ -107,11 +125,11 @@ final class GameScene: SKScene {
         } else if playerNode.position.y <= frame.minY {
             playerNode.position.y = frame.maxY
         }
+    }
 
-        guard let playerVelocity = playerNode.physicsBody?.velocity else { return }
-
-        playerNode.physicsBody?.velocity.dx = playerVelocity.dx > 0 ? min(playerVelocity.dx, maxVelocity) : max(playerVelocity.dx, -maxVelocity)
-
-        playerNode.physicsBody?.velocity.dy = playerVelocity.dy > 0 ? min(playerVelocity.dy, maxVelocity) : max(playerVelocity.dy, -maxVelocity)
+    private func limitPlayerVelocity() {
+        guard let playerVelocity = playerNode?.physicsBody?.velocity else { return }
+        playerNode?.physicsBody?.velocity.dx = playerVelocity.dx > 0 ? min(playerVelocity.dx, maxVelocity) : max(playerVelocity.dx, -maxVelocity)
+        playerNode?.physicsBody?.velocity.dy = playerVelocity.dy > 0 ? min(playerVelocity.dy, maxVelocity) : max(playerVelocity.dy, -maxVelocity)
     }
 }
