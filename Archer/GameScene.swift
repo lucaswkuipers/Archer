@@ -3,6 +3,9 @@ import GameController
 
 final class GameScene: SKScene {
     private let controllerManager = ControllerManager()
+
+    // MARK: - Scene Configuration
+
     private let maxVelocity: CGFloat = 1_000
     private let maxWalkSpeed: CGFloat = 300
     private let groundHoleWidth: CGFloat = 150
@@ -14,7 +17,10 @@ final class GameScene: SKScene {
     private let playerCornerRadius: CGFloat = 4
     private let playerWalkForceMult: Float = 50
     private let playerJumpImpulseMult = 30
-    private let playerGroundDetectionRange: CGFloat = 20
+    private let playerGroundDetectionRange: CGFloat = 30
+
+    // MARK: - Scene Nodes
+
     private var groundLeftNode: SKShapeNode?
     private var groundRightNode: SKShapeNode?
     private var ceilingLeftNode: SKShapeNode?
@@ -25,7 +31,15 @@ final class GameScene: SKScene {
     private var rightWallBottomNode: SKShapeNode?
     private var playerNode: SKShapeNode?
     private var playerFeetNode: SKShapeNode?
+    private var playerArmNode: SKShapeNode?
+    private var playerArmJointNode: SKShapeNode?
+
+    // MARK: - Scene State
+
     private var controller = GCController()
+    private var canShoot = true
+
+    // MARK: - Scene Events
 
     override func didMove(to view: SKView) {
         addGround()
@@ -40,6 +54,8 @@ final class GameScene: SKScene {
         handlePlayerMovement()
         limitPlayerVelocity()
     }
+
+    // MARK: - Scene Objects Setup
 
     private func addGround() {
         groundLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
@@ -116,22 +132,47 @@ final class GameScene: SKScene {
     }
 
     private func addPlayer() {
-        playerNode = SKShapeNode(rectOf: CGSize(width: playerWidth, height: playerHeight), cornerRadius: playerCornerRadius)
-        guard let playerNode = playerNode else { return }
-        playerNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        let playerNode = SKShapeNode(rectOf: CGSize(width: playerWidth, height: playerHeight), cornerRadius: playerCornerRadius)
+        playerNode.position = CGPoint(x: frame.midX - groundHoleWidth, y: frame.midY)
         playerNode.fillColor = .red
         playerNode.physicsBody = SKPhysicsBody(rectangleOf: playerNode.frame.size)
         playerNode.physicsBody?.restitution = 0
         playerNode.physicsBody?.allowsRotation = false
         playerNode.physicsBody?.friction = 0.5
         playerNode.physicsBody?.linearDamping = 0.9
-        addChild(playerNode)
 
-        playerFeetNode = SKShapeNode(rectOf: CGSize(width: playerWidth, height: playerGroundDetectionRange))
-        guard let playerFeetNode = playerFeetNode else { return }
+        let playerFeetNode = SKShapeNode(rectOf: CGSize(width: playerWidth, height: playerGroundDetectionRange))
         playerFeetNode.position = CGPoint(x: 0, y: -playerNode.frame.height / 2)
         playerNode.addChild(playerFeetNode)
         playerFeetNode.fillColor = .blue.withAlphaComponent(0.3)
+
+        let playerArmJointNode = SKShapeNode(circleOfRadius: 5)
+        playerArmJointNode.position = CGPoint(x: 0, y: 0)
+        playerArmJointNode.fillColor = .purple
+
+        let playerArmNode = SKShapeNode(rectOf: CGSize(width: 10, height: 30))
+        playerArmNode.position = CGPoint(x: playerArmNode.frame.height / 3 , y: playerArmNode.frame.height / 3)
+        playerArmNode.fillColor = .red
+
+        addChild(playerNode)
+        playerNode.addChild(playerArmJointNode)
+        playerArmJointNode.addChild(playerArmNode)
+
+        self.playerNode = playerNode
+        self.playerFeetNode = playerFeetNode
+        self.playerArmJointNode = playerArmJointNode
+        self.playerArmNode = playerArmNode
+    }
+
+    private func setDelegates() {
+        controllerManager.delegate = self
+    }
+
+    // MARK: - Player Movement
+
+    private func handlePlayerMovement() {
+        guard let dx = controller.extendedGamepad?.leftThumbstick.xAxis.value else { return }
+        walk(dx: dx)
     }
 
     private func teleportPlayerToSceneBounds() {
@@ -149,20 +190,13 @@ final class GameScene: SKScene {
         }
     }
 
-    private func handlePlayerMovement() {
-        guard let dx = controller.extendedGamepad?.leftThumbstick.xAxis.value else { return }
-        walk(dx: dx)
-    }
-
     private func limitPlayerVelocity() {
         guard let playerVelocity = playerNode?.physicsBody?.velocity else { return }
         playerNode?.physicsBody?.velocity.dx = playerVelocity.dx > 0 ? min(playerVelocity.dx, maxVelocity) : max(playerVelocity.dx, -maxVelocity)
         playerNode?.physicsBody?.velocity.dy = playerVelocity.dy > 0 ? min(playerVelocity.dy, maxVelocity) : max(playerVelocity.dy, -maxVelocity)
     }
 
-    private func setDelegates() {
-        controllerManager.delegate = self
-    }
+    // MARK: - Player Actions
 
     private func walk(dx: Float) {
         guard let physicsBody = playerNode?.physicsBody else { return }
@@ -183,12 +217,68 @@ final class GameScene: SKScene {
         }
     }
 
+    private func shoot() {
+        guard let playerNode = playerNode,
+              let gamepad = controller.extendedGamepad else { return }
+
+        let dx = gamepad.rightThumbstick.xAxis.value
+        let dy = gamepad.rightThumbstick.yAxis.value
+
+        print("Player just shot!")
+
+        let arrowHead = SKShapeNode(rectOf: CGSize(width: 10, height: 10))
+        playerNode.addChild(arrowHead)
+        arrowHead.fillColor = .black
+        arrowHead.physicsBody = SKPhysicsBody(rectangleOf: arrowHead.frame.size)
+        arrowHead.physicsBody?.restitution = 0
+        arrowHead.physicsBody?.linearDamping = 0
+        arrowHead.zRotation = CGFloat(atan(-dx/dy))
+        arrowHead.position = CGPoint(x: Int(dx) * 2, y: Int(dy) * 2)
+        arrowHead.physicsBody?.applyImpulse(CGVector(dx: CGFloat(dx) * 10, dy: CGFloat(dy) * 10))
+
+        let arrowNode = SKShapeNode(rectOf: CGSize(width: 5, height: 50))
+        arrowHead.addChild(arrowNode)
+        arrowNode.fillColor = .green
+        arrowNode.zRotation = CGFloat(atan(-dx/dy))
+        arrowNode.position = CGPoint(x: -arrowNode.frame.width / 2, y: -arrowNode.frame.height / 2)
+    }
+
+    // MARK: - Player Input Management
+
     private func addInputHandlers() {
-        controller.extendedGamepad?.buttonA.pressedChangedHandler = { (_, _, isPressed) in
+        guard let gamepad = controller.extendedGamepad else { return }
+
+        // Jump
+        gamepad.buttonA.pressedChangedHandler = { (_, _, isPressed) in
             if isPressed {
                 self.jump()
             }
         }
+
+        // Shoot
+        gamepad.rightTrigger.valueChangedHandler = { (_, value, isPressed) in
+            if value >= 0.8 && self.canShoot {
+                self.shoot()
+                self.canShoot = false
+            }
+
+            if value <= 0.1 {
+                self.canShoot = true
+            }
+        }
+
+        // Aim
+        gamepad.rightThumbstick.valueChangedHandler = { (_, xValue, yValue) in
+            guard let playerArmNode = self.playerArmNode else { return }
+            let angle = atan2(yValue, xValue)
+            let rotateAction = SKAction.rotate(byAngle: CGFloat(angle), duration: 0.4)
+            playerArmNode.run(rotateAction)
+        }
+    }
+
+    private func setAdaptiveTriggersIfDualSense() {
+        guard let rightTrigger = controller.extendedGamepad?.rightTrigger as? GCDualSenseAdaptiveTrigger else { return }
+        rightTrigger.setModeWeaponWithStartPosition(0, endPosition: 0.6, resistiveStrength: 1)
     }
 }
 
@@ -196,6 +286,7 @@ extension GameScene: ControllerManagerDelegate {
     func didConnect(_ controller: GCController) {
         self.controller = controller
         addInputHandlers()
+        setAdaptiveTriggersIfDualSense()
         print("Did connect controller!")
     }
 

@@ -7,9 +7,7 @@ final class GameViewController: UIViewController {
         super.viewDidLoad()
         guard let view = view as? SKView,
               let scene = SKScene(fileNamed: "GameScene") else { return }
-        scene.scaleMode = .resizeFill
         view.ignoresSiblingOrder = true
-        view.showsFields = true
         view.showsPhysics = true
         view.showsNodeCount = true
         view.showsFPS = true
