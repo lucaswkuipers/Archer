@@ -58,77 +58,83 @@ final class GameScene: SKScene {
     // MARK: - Scene Objects Setup
 
     private func addGround() {
-        groundLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
-        guard let groundLeftNode = groundLeftNode else { return }
+        let groundLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
         groundLeftNode.position = CGPoint(x: frame.minX + groundLeftNode.frame.width / 2, y: frame.minY)
         groundLeftNode.fillColor = .white
         groundLeftNode.physicsBody = SKPhysicsBody(rectangleOf: groundLeftNode.frame.size)
         groundLeftNode.physicsBody?.isDynamic = false
-        addChild(groundLeftNode)
 
-        groundRightNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
-        guard let groundRightNode = groundRightNode else { return }
+        let groundRightNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
         groundRightNode.position = CGPoint(x: frame.maxX - groundRightNode.frame.width / 2, y: frame.minY)
         groundRightNode.fillColor = .white
         groundRightNode.physicsBody = SKPhysicsBody(rectangleOf: groundRightNode.frame.size)
         groundRightNode.physicsBody?.isDynamic = false
+
+        addChild(groundLeftNode)
         addChild(groundRightNode)
+
+        self.groundLeftNode = groundLeftNode
+        self.groundRightNode = groundRightNode
     }
 
     private func addCeiling() {
-        ceilingLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
-        guard let ceilingLeftNode = ceilingLeftNode else { return }
+        let ceilingLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
         ceilingLeftNode.position = CGPoint(x: frame.minX + ceilingLeftNode.frame.width / 2, y: frame.maxY)
         ceilingLeftNode.fillColor = .white
         ceilingLeftNode.physicsBody = SKPhysicsBody(rectangleOf: ceilingLeftNode.frame.size)
         ceilingLeftNode.physicsBody?.isDynamic = false
-        addChild(ceilingLeftNode)
 
-        ceilingRightNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
-        guard let ceilingRightNode = ceilingRightNode else { return }
+        let ceilingRightNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
         ceilingRightNode.position = CGPoint(x: frame.maxX - ceilingRightNode.frame.width / 2, y: frame.maxY)
         ceilingRightNode.fillColor = .white
         ceilingRightNode.physicsBody = SKPhysicsBody(rectangleOf: ceilingRightNode.frame.size)
         ceilingRightNode.physicsBody?.isDynamic = false
+
+        addChild(ceilingLeftNode)
         addChild(ceilingRightNode)
+
+        self.ceilingLeftNode = ceilingLeftNode
+        self.ceilingRightNode = ceilingRightNode
     }
 
     private func addWalls() {
-        leftWallTopNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
-        guard let leftWallTopNode = leftWallTopNode else { return }
+        let leftWallTopNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
         leftWallTopNode.position = CGPoint(x: frame.minX, y: frame.maxY - leftWallTopNode.frame.height / 2)
         leftWallTopNode.fillColor = .white
         leftWallTopNode.physicsBody = SKPhysicsBody(rectangleOf: leftWallTopNode.frame.size)
         leftWallTopNode.physicsBody?.isDynamic = false
         leftWallTopNode.physicsBody?.restitution = 0
-        addChild(leftWallTopNode)
 
-        leftWallBottomNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
-        guard let leftWallBottomNode = leftWallBottomNode else { return }
+        let leftWallBottomNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
         leftWallBottomNode.position = CGPoint(x: frame.minX, y: frame.minY + leftWallBottomNode.frame.height / 2)
         leftWallBottomNode.fillColor = .white
         leftWallBottomNode.physicsBody = SKPhysicsBody(rectangleOf: leftWallBottomNode.frame.size)
         leftWallBottomNode.physicsBody?.isDynamic = false
         leftWallBottomNode.physicsBody?.restitution = 0
-        addChild(leftWallBottomNode)
 
-        rightWallTopNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
-        guard let rightWallTopNode = rightWallTopNode else { return }
+        let rightWallTopNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
         rightWallTopNode.position = CGPoint(x: frame.maxX, y: frame.maxY - rightWallTopNode.frame.height / 2)
         rightWallTopNode.fillColor = .white
         rightWallTopNode.physicsBody = SKPhysicsBody(rectangleOf: rightWallTopNode.frame.size)
         rightWallTopNode.physicsBody?.isDynamic = false
         rightWallTopNode.physicsBody?.restitution = 0
-        addChild(rightWallTopNode)
 
-        rightWallBottomNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
-        guard let rightWallBottomNode = rightWallBottomNode else { return }
+        let rightWallBottomNode = SKShapeNode(rectOf: CGSize(width: wallWidth, height: (frame.height - wallHoleHeight) / 2))
         rightWallBottomNode.position = CGPoint(x: frame.maxX, y: frame.minY + rightWallBottomNode.frame.height / 2)
         rightWallBottomNode.fillColor = .white
         rightWallBottomNode.physicsBody = SKPhysicsBody(rectangleOf: rightWallBottomNode.frame.size)
         rightWallBottomNode.physicsBody?.isDynamic = false
         rightWallBottomNode.physicsBody?.restitution = 0
+
+        addChild(leftWallTopNode)
+        addChild(leftWallBottomNode)
+        addChild(rightWallTopNode)
         addChild(rightWallBottomNode)
+
+        self.leftWallTopNode = leftWallTopNode
+        self.leftWallBottomNode = leftWallBottomNode
+        self.rightWallTopNode = rightWallTopNode
+        self.rightWallBottomNode = rightWallBottomNode
     }
 
     private func addPlayer() {
