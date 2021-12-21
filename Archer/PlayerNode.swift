@@ -2,6 +2,8 @@ import SpriteKit
 
 final class PlayerNode: SKShapeNode {
     private var feetNode = SKShapeNode()
+    private var armJointNode = SKShapeNode()
+    private var armNode = SKShapeNode()
     private let width: CGFloat = 30
     private let height: CGFloat = 40
     private let cornerRadius: CGFloat = 8
@@ -24,7 +26,13 @@ final class PlayerNode: SKShapeNode {
         feetNode.position = CGPoint(x: 0, y: -frame.height / 2)
         feetNode.fillColor = .blue.withAlphaComponent(0.3)
 
+
+        armJointNode = SKShapeNode(rectOf: CGSize(width: 5, height: 40))
+        armJointNode.position = CGPoint(x: 0, y: 0)
+        armJointNode.fillColor = .blue
+
         addChild(feetNode)
+        addChild(armJointNode)
     }
 
     required init?(coder: NSCoder) {
@@ -39,6 +47,13 @@ final class PlayerNode: SKShapeNode {
 
     func jump() {
         physicsBody?.applyImpulse(CGVector(dx: 0, dy: jumpImpulseMultiplier))
+    }
+
+    func aim(at point: CGPoint) {
+        let angle = atan2(point.y , point.x)
+        print("X: \(point.x), Y: \(point.y)")
+        print("Arms rotated: \(angle * 180 / .pi) degrees")
+        armJointNode.zRotation = angle + 90
     }
 
     func shoot(at point: CGPoint) {

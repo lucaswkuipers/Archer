@@ -53,9 +53,6 @@ final class GameScene: SKScene {
 
         let groundRightNode = GroundNode(width: (frame.width - groundHoleWidth) / 2, height: groundHeight)
         groundRightNode.position = CGPoint(x: frame.maxX - groundRightNode.frame.width / 2, y: frame.minY)
-        groundRightNode.fillColor = .white
-        groundRightNode.physicsBody = SKPhysicsBody(rectangleOf: groundRightNode.frame.size)
-        groundRightNode.physicsBody?.isDynamic = false
 
         addChild(groundLeftNode)
         addChild(groundRightNode)
@@ -204,6 +201,11 @@ final class GameScene: SKScene {
             if value <= 0.1 {
                 self.canShoot = true
             }
+        }
+
+        // Aim
+        gamepad.rightThumbstick.valueChangedHandler = {(_, xValue, yValue) in
+            self.playerNode.aim(at: CGPoint(x: CGFloat(xValue), y: CGFloat(yValue)))
         }
     }
 
