@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC3AE32C277181B600742D65 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3AE32B277181B600742D65 /* PlayerNode.swift */; };
+		EC3AE32E27718AA000742D65 /* GroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3AE32D27718AA000742D65 /* GroundNode.swift */; };
 		EC44FCB927681AD500A8B312 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCB827681AD500A8B312 /* AppDelegate.swift */; };
 		EC44FCBF27681AD500A8B312 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCBE27681AD500A8B312 /* GameScene.swift */; };
 		EC44FCC127681AD500A8B312 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC44FCC027681AD500A8B312 /* GameViewController.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		EC3AE32B277181B600742D65 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNode.swift; sourceTree = "<group>"; };
+		EC3AE32D27718AA000742D65 /* GroundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundNode.swift; sourceTree = "<group>"; };
 		EC44FCB527681AD500A8B312 /* Archer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Archer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC44FCB827681AD500A8B312 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC44FCBE27681AD500A8B312 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				EC44FCFC27685A8200A8B312 /* TileSet.sks */,
 				ECD4B5512769A0710064FB72 /* ControllerManager.swift */,
 				EC3AE32B277181B600742D65 /* PlayerNode.swift */,
+				EC3AE32D27718AA000742D65 /* GroundNode.swift */,
 			);
 			path = Archer;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				EC44FCBF27681AD500A8B312 /* GameScene.swift in Sources */,
 				ECD4B5522769A0710064FB72 /* ControllerManager.swift in Sources */,
+				EC3AE32E27718AA000742D65 /* GroundNode.swift in Sources */,
 				EC44FCC127681AD500A8B312 /* GameViewController.swift in Sources */,
 				EC44FCB927681AD500A8B312 /* AppDelegate.swift in Sources */,
 				EC3AE32C277181B600742D65 /* PlayerNode.swift in Sources */,

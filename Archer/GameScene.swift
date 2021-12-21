@@ -14,8 +14,8 @@ final class GameScene: SKScene {
 
     // MARK: - Scene Nodes
 
-    private var groundLeftNode = SKShapeNode()
-    private var groundRightNode = SKShapeNode()
+    private var groundLeftNode = GroundNode()
+    private var groundRightNode = GroundNode()
     private var ceilingLeftNode = SKShapeNode()
     private var ceilingRightNode = SKShapeNode()
     private var leftWallTopNode = SKShapeNode()
@@ -48,13 +48,10 @@ final class GameScene: SKScene {
     // MARK: - Scene Objects Setup
 
     private func addGround() {
-        let groundLeftNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
+        let groundLeftNode = GroundNode(width: (frame.width - groundHoleWidth) / 2, height: groundHeight)
         groundLeftNode.position = CGPoint(x: frame.minX + groundLeftNode.frame.width / 2, y: frame.minY)
-        groundLeftNode.fillColor = .white
-        groundLeftNode.physicsBody = SKPhysicsBody(rectangleOf: groundLeftNode.frame.size)
-        groundLeftNode.physicsBody?.isDynamic = false
 
-        let groundRightNode = SKShapeNode(rectOf: CGSize(width: (frame.width - groundHoleWidth) / 2, height: groundHeight))
+        let groundRightNode = GroundNode(width: (frame.width - groundHoleWidth) / 2, height: groundHeight)
         groundRightNode.position = CGPoint(x: frame.maxX - groundRightNode.frame.width / 2, y: frame.minY)
         groundRightNode.fillColor = .white
         groundRightNode.physicsBody = SKPhysicsBody(rectangleOf: groundRightNode.frame.size)
