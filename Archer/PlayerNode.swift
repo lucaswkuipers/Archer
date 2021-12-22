@@ -16,6 +16,7 @@ final class PlayerNode: SKShapeNode {
         super.init()
         path = SKShapeNode(rectOf: CGSize(width: width, height: height), cornerRadius: cornerRadius).path
         fillColor = .red
+        strokeColor = .black
         physicsBody = SKPhysicsBody(rectangleOf: frame.size)
         physicsBody?.restitution = 0
         physicsBody?.friction = 0.5
@@ -24,15 +25,22 @@ final class PlayerNode: SKShapeNode {
 
         feetNode = SKShapeNode(rectOf: CGSize(width: width, height: groundDetectionRange))
         feetNode.position = CGPoint(x: 0, y: -frame.height / 2)
-        feetNode.fillColor = .blue.withAlphaComponent(0.3)
+        feetNode.fillColor = .blue.withAlphaComponent(0.1)
+        feetNode.strokeColor = .clear
 
+        armJointNode = SKShapeNode(rectOf: CGSize(width: 10, height: 10))
+        armJointNode.fillColor = .clear
+        armJointNode.strokeColor = .clear
 
-        armJointNode = SKShapeNode(rectOf: CGSize(width: 5, height: 40))
-        armJointNode.position = CGPoint(x: 0, y: 0)
-        armJointNode.fillColor = .blue
+        armNode = SKShapeNode(rectOf: CGSize(width: 10, height: 30), cornerRadius: 10)
+        armNode.position = CGPoint(x: 0, y: -armNode.frame.height / 3)
+        armNode.fillColor = .red
+        armNode.strokeColor = .black
+
 
         addChild(feetNode)
         addChild(armJointNode)
+        armJointNode.addChild(armNode)
     }
 
     required init?(coder: NSCoder) {
