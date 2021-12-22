@@ -41,9 +41,9 @@ final class GameScene: SKScene {
     }
 
     override func update(_ currentTime: TimeInterval) {
-        teleportPlayerToSceneBounds()
+        teleportObjectsToSceneBounds()
         handlePlayerMovement()
-        limitPlayerVelocity()
+        limitObjectsVelocity()
     }
 
     // MARK: - Scene Objects Setup
@@ -138,24 +138,43 @@ final class GameScene: SKScene {
         walk(dx: dx)
     }
 
-    private func teleportPlayerToSceneBounds() {
-        if playerNode.position.x >= frame.maxX + playerNode.frame.width / 2 {
-            playerNode.position.x = frame.minX - playerNode.frame.width / 2
-        } else if playerNode.position.x <= frame.minX - playerNode.frame.width / 2 {
-            playerNode.position.x = frame.maxX + playerNode.frame.width / 2
-        }
+    private func teleportObjectsToSceneBounds() {
+        guard let scene = scene else { return }
 
-        if playerNode.position.y >= frame.maxY + playerNode.frame.height / 2 {
-            playerNode.position.y = frame.minY - playerNode.frame.height / 2
-        } else if playerNode.position.y <= frame.minY - playerNode.frame.height / 2 {
-            playerNode.position.y = frame.maxY + playerNode.frame.height / 2
+        for child in scene.children {
+            // Ignore platforms
+            if isPlatform(child) { continue }
+
+            // Right
+            if child.position.x >= frame.maxX + child.frame.width / 2 {
+                child.position.x = frame.minX - child.frame.width / 2
+            }
+            // Left
+            else if child.position.x <= frame.minX - child.frame.width / 2 {
+                child.position.x = frame.maxX + child.frame.width / 2
+            }
+
+            // Top
+            if child.position.y >= frame.maxY + child.frame.height / 2 {
+                child.position.y = frame.minY - child.frame.height / 2
+            }
+
+            // Bottom
+            else if child.position.y <= frame.minY - child.frame.height / 2 {
+                child.position.y = frame.maxY + child.frame.height / 2
+            }
         }
     }
 
-    private func limitPlayerVelocity() {
-        guard let playerVelocity = playerNode.physicsBody?.velocity else { return }
-        playerNode.physicsBody?.velocity.dx = playerVelocity.dx > 0 ? min(playerVelocity.dx, maxVelocity) : max(playerVelocity.dx, -maxVelocity)
-        playerNode.physicsBody?.velocity.dy = playerVelocity.dy > 0 ? min(playerVelocity.dy, maxVelocity) : max(playerVelocity.dy, -maxVelocity)
+    private func limitObjectsVelocity() {
+        guard let scene = scene else { return }
+
+        for child in scene.children {
+            guard let velocity = child.physicsBody?.velocity else { return }
+
+            child.physicsBody?.velocity.dx = velocity.dx > 0 ? min(velocity.dx, maxVelocity) : max(velocity.dx, -maxVelocity)
+            child.physicsBody?.velocity.dy = velocity.dy > 0 ? min(velocity.dy, maxVelocity) : max(velocity.dy, -maxVelocity)
+        }
     }
 
     // MARK: - Player Actions
@@ -215,6 +234,12 @@ final class GameScene: SKScene {
     private func setAdaptiveTriggersIfDualSense() {
         guard let rightTrigger = controller.extendedGamepad?.rightTrigger as? GCDualSenseAdaptiveTrigger else { return }
         rightTrigger.setModeWeaponWithStartPosition(0, endPosition: 0.6, resistiveStrength: 1)
+    }
+
+    // MARK: - Helpers
+
+    private func isPlatform(_ node: SKNode) -> Bool {
+        return node.isEqual(to: groundLeftNode) || node.isEqual(to: groundRightNode) || node.isEqual(to: ceilingLeftNode) || node.isEqual(to: ceilingRightNode) || node.isEqual(to: leftWallTopNode) || node.isEqual(to: leftWallBottomNode) || node.isEqual(to: rightWallTopNode) || node.isEqual(to: rightWallBottomNode)
     }
 }
 
