@@ -37,6 +37,7 @@ final class GameScene: SKScene {
         addWalls()
         addPlayer()
         setDelegates()
+        physicsBody?.contactTestBitMask = 0
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -164,19 +165,14 @@ final class GameScene: SKScene {
     }
 
     private func jump() {
-        let isGrounded = playerNode.isOnTop(of: groundLeftNode) || playerNode.isOnTop(of: groundRightNode) || playerNode.isOnTop(of: leftWallBottomNode) || playerNode.isOnTop(of: rightWallBottomNode)
+        let isGrounded = playerNode.isOnFloor()
         if isGrounded {
             playerNode.jump()
         }
     }
 
     private func shoot() {
-        guard let gamepad = controller.extendedGamepad else { return }
-
-        let horizontalAxisValue = CGFloat(gamepad.rightThumbstick.xAxis.value)
-        let verticalAxisValue = CGFloat(gamepad.rightThumbstick.yAxis.value)
-
-        playerNode.shoot(at: CGPoint(x: horizontalAxisValue, y: verticalAxisValue))
+        playerNode.shoot()
     }
 
     // MARK: - Player Input Management
@@ -204,8 +200,15 @@ final class GameScene: SKScene {
         }
 
         // Aim
-        gamepad.rightThumbstick.valueChangedHandler = {(_, xValue, yValue) in
-            self.playerNode.aim(at: CGPoint(x: CGFloat(xValue), y: CGFloat(yValue)))
+        gamepad.leftThumbstick.valueChangedHandler = {(_, xValue, yValue) in
+            print("xValue: \(xValue)")
+            print("yValue: \(yValue)")
+            let deadZone: Float = 0.2
+            if abs(xValue) < deadZone && abs(yValue) < deadZone { return }
+
+            let angle = Double(atan2(yValue, xValue)) + .pi / 2
+            print(angle)
+            self.playerNode.aim(at: angle)
         }
     }
 
