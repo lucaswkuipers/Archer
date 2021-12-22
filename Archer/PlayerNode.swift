@@ -11,6 +11,8 @@ final class PlayerNode: SKShapeNode {
     private let jumpImpulseMultiplier = 30
     private let groundDetectionRange: CGFloat = 30
     private let topWalkSpeed: CGFloat = 300
+    private let rotationSpeed = CGFloat((2 * Double.pi) / 2)
+    private let lastUpdateTime: CFTimeInterval = 0
 
     override init() {
         super.init()
@@ -59,9 +61,7 @@ final class PlayerNode: SKShapeNode {
 
     func aim(at point: CGPoint) {
         let angle = atan2(point.y , point.x)
-        print("X: \(point.x), Y: \(point.y)")
-        print("Arms rotated: \(angle * 180 / .pi) degrees")
-        armJointNode.zRotation = angle + 90
+        rotate(to: angle + 90)
     }
 
     func shoot(at point: CGPoint) {
@@ -70,6 +70,13 @@ final class PlayerNode: SKShapeNode {
 
     func isOnTop(of node: SKNode) -> Bool {
         return feetNode.intersects(node)
+    }
+
+    func rotate(to angle: CGFloat) {
+        let angleToRotateBy = abs(angle - armJointNode.zRotation)
+        let rotationTime = TimeInterval(angleToRotateBy / 60.0)
+        let rotateAction = SKAction.rotate(toAngle: angle, duration: rotationTime , shortestUnitArc: true)
+        armJointNode.run(rotateAction)
     }
 }
 
