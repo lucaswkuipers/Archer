@@ -1,7 +1,7 @@
 import GameController
 
 protocol ControllerManagerDelegate: AnyObject {
-    func didConnect(_ controller: GCController)
+    func didConnect(_ controllers: [GCController])
     func didDisconnectController()
 }
 
@@ -21,8 +21,7 @@ final class ControllerManager {
     }
 
     @objc private func didConnectController() {
-        guard let controller = GCController.controllers().first else { return }
-        delegate?.didConnect(controller)
+        delegate?.didConnect(GCController.controllers())
     }
 
     @objc private func didDisconnectController() {

@@ -26,7 +26,7 @@ final class GameScene: SKScene {
 
     // MARK: - Scene State
 
-    private var controller = GCController()
+    private var controllers: [GCController] = []
     private var canShoot = true
 
     // MARK: - Scene Events
@@ -134,8 +134,10 @@ final class GameScene: SKScene {
     // MARK: - Player Movement
 
     private func handlePlayerMovement() {
-        guard let dx = controller.extendedGamepad?.leftThumbstick.xAxis.value else { return }
-        walk(dx: dx)
+        for controller in controllers {
+            guard let dx = controller.extendedGamepad?.leftThumbstick.xAxis.value else { return }
+            walk(dx: dx)
+        }
     }
 
     private func teleportObjectsToSceneBounds() {
@@ -197,43 +199,47 @@ final class GameScene: SKScene {
     // MARK: - Player Input Management
 
     private func addInputHandlers() {
-        guard let gamepad = controller.extendedGamepad else { return }
+        for controller in controllers {
+            guard let gamepad = controller.extendedGamepad else { return }
 
-        // Jump
-        gamepad.buttonA.pressedChangedHandler = { (_, _, isPressed) in
-            if isPressed {
-                self.jump()
-            }
-        }
-
-        // Shoot
-        gamepad.rightTrigger.valueChangedHandler = { (_, value, isPressed) in
-            if value >= 0.8 && self.canShoot {
-                self.shoot()
-                self.canShoot = false
+            // Jump
+            gamepad.buttonA.pressedChangedHandler = { (_, _, isPressed) in
+                if isPressed {
+                    self.jump()
+                }
             }
 
-            if value <= 0.1 {
-                self.canShoot = true
+            // Shoot
+            gamepad.rightTrigger.valueChangedHandler = { (_, value, isPressed) in
+                if value >= 0.8 && self.canShoot {
+                    self.shoot()
+                    self.canShoot = false
+                }
+
+                if value <= 0.1 {
+                    self.canShoot = true
+                }
             }
-        }
 
-        // Aim
-        gamepad.leftThumbstick.valueChangedHandler = {(_, xValue, yValue) in
-            print("xValue: \(xValue)")
-            print("yValue: \(yValue)")
-            let deadZone: Float = 0.2
-            if abs(xValue) < deadZone && abs(yValue) < deadZone { return }
+            // Aim
+            gamepad.leftThumbstick.valueChangedHandler = {(_, xValue, yValue) in
+                print("xValue: \(xValue)")
+                print("yValue: \(yValue)")
+                let deadZone: Float = 0.2
+                if abs(xValue) < deadZone && abs(yValue) < deadZone { return }
 
-            let angle = Double(atan2(yValue, xValue)) + .pi / 2
-            print(angle)
-            self.playerNode.aim(at: angle)
+                let angle = Double(atan2(yValue, xValue)) + .pi / 2
+                print(angle)
+                self.playerNode.aim(at: angle)
+            }
         }
     }
 
     private func setAdaptiveTriggersIfDualSense() {
-        guard let rightTrigger = controller.extendedGamepad?.rightTrigger as? GCDualSenseAdaptiveTrigger else { return }
-        rightTrigger.setModeWeaponWithStartPosition(0, endPosition: 0.6, resistiveStrength: 1)
+        for controller in controllers {
+            guard let rightTrigger = controller.extendedGamepad?.rightTrigger as? GCDualSenseAdaptiveTrigger else { continue }
+            rightTrigger.setModeWeaponWithStartPosition(0, endPosition: 0.6, resistiveStrength: 1)
+        }
     }
 
     // MARK: - Helpers
@@ -244,8 +250,8 @@ final class GameScene: SKScene {
 }
 
 extension GameScene: ControllerManagerDelegate {
-    func didConnect(_ controller: GCController) {
-        self.controller = controller
+    func didConnect(_ controllers: [GCController]) {
+        self.controllers = controllers
         addInputHandlers()
         setAdaptiveTriggersIfDualSense()
         print("Did connect controller!")
