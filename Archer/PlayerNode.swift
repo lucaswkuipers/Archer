@@ -4,6 +4,7 @@ final class PlayerNode: SKShapeNode {
     private var feetNode = SKShapeNode()
     private var armJointNode = SKShapeNode()
     private var armNode = SKShapeNode()
+    private var color: UIColor
 
     private let width: CGFloat = 30
     private let height: CGFloat = 40
@@ -21,13 +22,14 @@ final class PlayerNode: SKShapeNode {
     private let throwStrength: CGFloat = 10
 
     override init() {
+        self.color = UIColor.random()
         super.init()
-
         setupNode()
         setupSubNodes()
     }
 
     required init?(coder: NSCoder) {
+        self.color = UIColor.random()
         super.init(coder: coder)
     }
 
@@ -82,7 +84,7 @@ final class PlayerNode: SKShapeNode {
 
     private func setupNodeStyle() {
         path = SKShapeNode(rectOf: CGSize(width: width, height: height), cornerRadius: cornerRadius).path
-        fillColor = .red
+        fillColor = color
         strokeColor = .black
     }
 
@@ -97,7 +99,7 @@ final class PlayerNode: SKShapeNode {
     private func setupSubNodes() {
         feetNode = SKShapeNode(rectOf: CGSize(width: width - 2, height: groundDetectionRange))
         feetNode.position = CGPoint(x: 0, y: -(frame.height + feetNode.frame.height) / 2)
-        feetNode.fillColor = .blue.withAlphaComponent(0.1)
+        feetNode.fillColor = .clear
         feetNode.strokeColor = .clear
 
         armJointNode = SKShapeNode(rectOf: CGSize(width: 10, height: 10))
@@ -106,7 +108,7 @@ final class PlayerNode: SKShapeNode {
 
         armNode = SKShapeNode(rectOf: CGSize(width: 10, height: 30), cornerRadius: 10)
         armNode.position = CGPoint(x: 0, y: -armNode.frame.height / 3)
-        armNode.fillColor = .red
+        armNode.fillColor = color
         armNode.strokeColor = .black
 
         addChild(feetNode)
@@ -118,7 +120,7 @@ final class PlayerNode: SKShapeNode {
         let projectile = SKShapeNode(circleOfRadius: 5)
         projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.frame.width / 2)
         projectile.physicsBody?.mass = projectileMass
-        projectile.fillColor = .gray
+        projectile.fillColor = color.withAlphaComponent(0.8)
         let rotation = armJointNode.zRotation + 180
         projectile.position = CGPoint(x: (position.x + armNode.frame.width * cos(rotation)) * 1.1, y: (position.y + armNode.frame.height * sin(rotation) * 1.1))
         return projectile

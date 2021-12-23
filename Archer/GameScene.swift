@@ -22,12 +22,14 @@ final class GameScene: SKScene {
     private var leftWallBottomNode = SKShapeNode()
     private var rightWallTopNode = SKShapeNode()
     private var rightWallBottomNode = SKShapeNode()
-    private var playerNode = PlayerNode()
+
+    // Players
+    private var playerNodes: [PlayerNode] = []
 
     // MARK: - Scene State
 
     private var controllers: [GCController] = []
-    private var canShoot = true
+    private var canShootArray: [Bool] = []
 
     // MARK: - Scene Events
 
@@ -35,9 +37,7 @@ final class GameScene: SKScene {
         addGround()
         addCeiling()
         addWalls()
-        addPlayer()
         setDelegates()
-        physicsBody?.contactTestBitMask = 0
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -123,8 +123,15 @@ final class GameScene: SKScene {
     }
 
     private func addPlayer() {
+        let playerNode = PlayerNode()
         playerNode.position = CGPoint(x: frame.midX - groundHoleWidth, y: frame.midY)
         addChild(playerNode)
+        playerNodes.append(playerNode)
+        canShootArray.append(true)
+    }
+
+    private func removePlayer() {
+        playerNodes.removeLast()
     }
 
     private func setDelegates() {
@@ -134,9 +141,9 @@ final class GameScene: SKScene {
     // MARK: - Player Movement
 
     private func handlePlayerMovement() {
-        for controller in controllers {
+        for (index, controller) in controllers.enumerated() {
             guard let dx = controller.extendedGamepad?.leftThumbstick.xAxis.value else { return }
-            walk(dx: dx)
+            walk(dx: dx, indexOfPlayer: index)
         }
     }
 
@@ -181,43 +188,48 @@ final class GameScene: SKScene {
 
     // MARK: - Player Actions
 
-    private func walk(dx: Float) {
+    private func walk(dx: Float, indexOfPlayer: Int) {
+        if playerNodes.isEmpty { return }
+        if indexOfPlayer >= playerNodes.count { return }
+        let playerNode = playerNodes[indexOfPlayer]
         playerNode.walk(dx: dx)
     }
 
-    private func jump() {
+    private func jump(indexOfPlayer: Int) {
+        let playerNode = playerNodes[indexOfPlayer]
         let isGrounded = playerNode.isOnFloor()
         if isGrounded {
             playerNode.jump()
         }
     }
 
-    private func shoot() {
+    private func shoot(indexOfPlayer: Int) {
+        let playerNode = playerNodes[indexOfPlayer]
         playerNode.shoot()
     }
 
     // MARK: - Player Input Management
 
     private func addInputHandlers() {
-        for controller in controllers {
+        for (index, controller) in controllers.enumerated() {
             guard let gamepad = controller.extendedGamepad else { return }
 
             // Jump
             gamepad.buttonA.pressedChangedHandler = { (_, _, isPressed) in
                 if isPressed {
-                    self.jump()
+                    self.jump(indexOfPlayer: index)
                 }
             }
 
             // Shoot
             gamepad.rightTrigger.valueChangedHandler = { (_, value, isPressed) in
-                if value >= 0.8 && self.canShoot {
-                    self.shoot()
-                    self.canShoot = false
+                if value >= 0.8 && self.canShootArray[index] {
+                    self.shoot(indexOfPlayer: index)
+                    self.canShootArray[index] = false
                 }
 
                 if value <= 0.1 {
-                    self.canShoot = true
+                    self.canShootArray[index] = true
                 }
             }
 
@@ -229,8 +241,9 @@ final class GameScene: SKScene {
                 if abs(xValue) < deadZone && abs(yValue) < deadZone { return }
 
                 let angle = Double(atan2(yValue, xValue)) + .pi / 2
-                print(angle)
-                self.playerNode.aim(at: angle)
+                print("Angle: \(angle)")
+                let playerNode = self.playerNodes[index]
+                playerNode.aim(at: angle)
             }
         }
     }
@@ -254,10 +267,12 @@ extension GameScene: ControllerManagerDelegate {
         self.controllers = controllers
         addInputHandlers()
         setAdaptiveTriggersIfDualSense()
+        addPlayer()
         print("Did connect controller!")
     }
 
     func didDisconnectController() {
         print("Did disconnect controller")
+        removePlayer()
     }
 }

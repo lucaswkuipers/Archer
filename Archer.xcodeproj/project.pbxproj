@@ -19,6 +19,7 @@
 		EC44FCEC27683AA500A8B312 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCEB27683AA500A8B312 /* GameScene.sks */; };
 		EC44FCF1276842E600A8B312 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCEF276842E600A8B312 /* Main.storyboard */; };
 		EC44FCF927685A0000A8B312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC44FCF827685A0000A8B312 /* Assets.xcassets */; };
+		EC71CDEA2773DADB00060F75 /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71CDE92773DADB00060F75 /* UIColor+Random.swift */; };
 		ECD4B5522769A0710064FB72 /* ControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD4B5512769A0710064FB72 /* ControllerManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		EC44FCEB27683AA500A8B312 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EC44FCF0276842E600A8B312 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC44FCF827685A0000A8B312 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC71CDE92773DADB00060F75 /* UIColor+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
 		ECD4B5512769A0710064FB72 /* ControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,7 @@
 				ECD4B5512769A0710064FB72 /* ControllerManager.swift */,
 				EC3AE32B277181B600742D65 /* PlayerNode.swift */,
 				EC3AE32D27718AA000742D65 /* GroundNode.swift */,
+				EC71CDE92773DADB00060F75 /* UIColor+Random.swift */,
 			);
 			path = Archer;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				EC44FCBF27681AD500A8B312 /* GameScene.swift in Sources */,
 				ECD4B5522769A0710064FB72 /* ControllerManager.swift in Sources */,
 				EC3AE32E27718AA000742D65 /* GroundNode.swift in Sources */,
+				EC71CDEA2773DADB00060F75 /* UIColor+Random.swift in Sources */,
 				EC44FCC127681AD500A8B312 /* GameViewController.swift in Sources */,
 				EC44FCB927681AD500A8B312 /* AppDelegate.swift in Sources */,
 				EC3AE32C277181B600742D65 /* PlayerNode.swift in Sources */,
